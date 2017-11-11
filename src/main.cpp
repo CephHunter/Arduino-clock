@@ -20,12 +20,12 @@ int hora, minuto, hh, mm, temp, umid, tpo, dezHora, uniHora, horaAlarme, minutoA
 byte statusPIR, statusAlarme, statusTempo, statusGatilho;
 
 // Display variables
-uint8_t SER   = 2;
-uint8_t SRCLK = 3;
-uint8_t RCLK1 = 4;
-uint8_t RCLK2 = 5;
-uint8_t RCLK3 = 6;
-uint8_t RCLK4 = 7;
+uint8_t SER   = 2;                    // Pin 2 connected to the serial pins of all four shift registers
+uint8_t SRCLK = 3;                    // Pin 3 connected to the Storage clock pins of all four shift registers
+uint8_t RCLK1 = 4;                    // Pin 4 connected to the Real clock of the shift register controlling the left most display
+uint8_t RCLK2 = 5;                    // Pin 5 connected to the Real clock of the shift register controlling the second from the left display
+uint8_t RCLK3 = 6;                    // Pin 6 connected to the Real clock of the shift register controlling the third from the left display
+uint8_t RCLK4 = 7;                    // Pin 7 connected to the Real clock of the shift register controlling the fourth from the left display
 bool CC       = true;
 
 // Encoder variables
