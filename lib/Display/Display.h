@@ -21,8 +21,8 @@ class Display
     //! Initialize a Display object, setting the serial, strorage clock, real clock and display type.
     //!
     //! @param SER - The number of the digital pin connected to the serial pins of all four shift registers
-    //! @param SRCLK - The number of the digital pin connected to the Storage clock of all four shift registers
-    //! @param RCLK[1..4] - Respectively the number of the digital pin connected to the real clock each individual shift register
+    //! @param SRCLK - The number of the digital pin connected to the Shift register clock of all four shift registers
+    //! @param RCLK[1..4] - Respectively the number of the digital pin connected to the Storage clock each individual shift register
     //! @param CC - Display type (CC == true => common cathode; CC == false => common anode)
     Display(uint8_t SER = 2, uint8_t SRCLK = 3, uint8_t RCLK1 = 4, uint8_t RCLK2 = 5, uint8_t RCLK3 = 6, uint8_t RCLK4 = 7, bool CC = true);
 
