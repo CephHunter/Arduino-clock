@@ -11,8 +11,7 @@ void lerEncoder();
 #include <Time.h>                     // Time Library
 #include <DS1307RTC.h>                // Library of Real Time Clock (RTC)
 #include <Wire.h>                     // Library of Wire to support DS1307RTC (Real-Time Clock) - Pins to Arduino UNO: A4 (SDA), A5 (SCL)
-// #include <DHT11.h>                    // Library of Temperature and Humidity sensor
-// DHT11 library geeft problemene dus de temperatuur sensor heb ik nu uitgezet
+#include <DHT11.h>                    // Library of Temperature and Humidity sensor
 
 #define DS1307_I2C_ADDRESS 0x68       // This is the I2C address (RTC)
 
@@ -36,9 +35,9 @@ byte encoderPinA = 10;                 // Encoder variable - CLK
 int PIR = 11;                          // Pin #11 connected to PIR (Presence Infra Red sensor)
 int BUZ = 12;                          // Pin #12 connected to buzzer (Alarm)
 
-// int chk;                              // Variable to read the sensor DHT11
-// DHT11 DHT                             // Define the name DHT for the sensor of Temperature and Humidity
-// #define DHT11_PIN 13                  // Sensor DHT11 conected to the Pin #13 on Arduino
+int chk;                              // Variable to read the sensor DHT11
+dht11 DHT;                            // Define the name DHT for the sensor of Temperature and Humidity
+#define DHT11_PIN A0                  // Sensor DHT11 conected to the Pin #A0 on Arduino
 
 byte encoderPos = 0;
 byte encoderPinALast = LOW;
@@ -405,47 +404,47 @@ void loop() {
     delay(2000);
   }
 
-  // if (linSW == 0) {
-  //
-  //   temp = DHT.temperature;                     // Read temperature in Celsius degrees (C)
-  //
-  //   //Optional calculation of Temperature in Fahrenheit degrees (F). Remove the comments ("//") of following statement before use it.
-  //   //temp = (temp * 18) / 10 + 32;
-  //
-  //   //Display Temperature (C or F)
-  //   display.showNumberDec(temp, true, 2, 0);    // Show Temperature in 2 digits begenning at Display #0 (first from left to right)
-  //   display.setSegments(Grau, 1, 2);            // Show the symbol of degree ()
-  //   display.setSegments(Celsius, 1, 3);         // Celsius symbol
-  //   //display.setSegments(Fahrenheit, 1, 3);    // Optional Fahrenheit symbol. Remove the comments ("//") of following statement before use it.
-  //   delay(2000);
-  // }
+  if (linSW == 0) {
 
-  // if (linSW == 0) {
-  //
-  //   umid = DHT.humidity + 10;                   // Read Humidity (%)
-  //
-  //   //Optional calculation of Temperature in Fahrenheit degrees (F). Remove the comments ("//") of following statement to use it.
-  //   //temp = (temp * 18) / 10 + 32;
-  //
-  //   //Display Relative Humidity (%)
-  //   display.showNumberDec(umid, true, 2, 0);
-  //   display.setSegments(Grau, 1, 2);
-  //   display.setSegments(UR, 1, 3);
-  //   delay(2000);
-  // }
+    temp = DHT.temperature;                     // Read temperature in Celsius degrees (C)
 
-  // if (linSW == 0) {
-  //
-  //   tpo = temp - (100 - umid) / 5;                // Dew Point calculation (aproximated)
-  //
-  //   //Optional calculation of Temperature in Fahrenheit degrees (F). Remove the comments ("//") of following statement before use it.
-  //   //tpo = (tpo * 18) / 10 + 32;
-  //
-  //   //Display Dew Point (C or F)
-  //   display.showNumberDec(tpo, true, 2, 0);
-  //   display.setSegments(UR, 1, 2);
-  //   display.setSegments(UR, 1, 3);
-  //   delay(2000);
-  // }
+    //Optional calculation of Temperature in Fahrenheit degrees (F). Remove the comments ("//") of following statement before use it.
+    //temp = (temp * 18) / 10 + 32;
+
+    //Display Temperature (C or F)
+    display.showNumberDec(temp, true, 2, 0);    // Show Temperature in 2 digits begenning at Display #0 (first from left to right)
+    display.setSegments(Grau, 1, 2);            // Show the symbol of degree ()
+    display.setSegments(Celsius, 1, 3);         // Celsius symbol
+    //display.setSegments(Fahrenheit, 1, 3);    // Optional Fahrenheit symbol. Remove the comments ("//") of following statement before use it.
+    delay(2000);
+  }
+
+  if (linSW == 0) {
+
+    umid = DHT.humidity + 10;                   // Read Humidity (%)
+
+    //Optional calculation of Temperature in Fahrenheit degrees (F). Remove the comments ("//") of following statement to use it.
+    //temp = (temp * 18) / 10 + 32;
+
+    //Display Relative Humidity (%)
+    display.showNumberDec(umid, true, 2, 0);
+    display.setSegments(Grau, 1, 2);
+    display.setSegments(UR, 1, 3);
+    delay(2000);
+  }
+
+  if (linSW == 0) {
+
+    tpo = temp - (100 - umid) / 5;                // Dew Point calculation (aproximated)
+
+    //Optional calculation of Temperature in Fahrenheit degrees (F). Remove the comments ("//") of following statement before use it.
+    //tpo = (tpo * 18) / 10 + 32;
+
+    //Display Dew Point (C or F)
+    display.showNumberDec(tpo, true, 2, 0);
+    display.setSegments(UR, 1, 2);
+    display.setSegments(UR, 1, 3);
+    delay(2000);
+  }
 
 }
