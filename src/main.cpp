@@ -4,15 +4,8 @@
 void buzzer();
 void lerEncoder();
 
-/*                       Digital Clock by LAGSILVA
-     Digital Clock with PIR & LED Display - TM1637 - 4 Digits x 7 Segments
-               Display Time, Temperature, Humidity & Dew Point
-        Special Features: PIR sensor & Alarm with data recorded at RTC
-                            V1.0 - 22.Apr.2016
-                          by lagsilva@gmail.com
-*/
-
-#include <TM1637Display.h>            // Library of Display TM1637 (I2C)
+// Inlcude libraries
+#include <Display.h>                  // Librarie to drive control the shift registers
 #include <Bounce2.h>                  // Library to read Encoder key
 #include <TimerOne.h>                 // Library of Timer1
 #include <Time.h>                     // Time Library
@@ -26,20 +19,26 @@ void lerEncoder();
 int hora, minuto, hh, mm, temp, umid, tpo, dezHora, uniHora, horaAlarme, minutoAlarme;
 byte statusPIR, statusAlarme, statusTempo, statusGatilho;
 
-#define DIO 2                         // Arduino Conection on Pin #2 = DIO of Display Module TM1637
-#define CLK 3                         // Arduino Conection on Pin #3 = CLK of Display Module TM1637
+// Display variables
+uint8_t SER   = 2;
+uint8_t SRCLK = 3;
+uint8_t RCLK1 = 4;
+uint8_t RCLK2 = 5;
+uint8_t RCLK3 = 6;
+uint8_t RCLK4 = 7;
+bool CC       = true;
 
-//Encoder variables
-byte encoderPinSW = 4;                // Encoder variable - SW
-byte encoderPinB = 5;                 // Encoder variable - DT
-byte encoderPinA = 6;                 // Encoder variable - CLK
+// Encoder variables
+byte encoderPinSW = 8;                // Encoder variable - SW
+byte encoderPinB = 9;                 // Encoder variable - DT
+byte encoderPinA = 10;                 // Encoder variable - CLK
 
-int PIR = 7;                          // Pin #7 connected to PIR (Presence Infra Red sensor)
-int BUZ = 8;                          // Pin #8 connected to buzzer (Alarm)
+int PIR = 11;                          // Pin #11 connected to PIR (Presence Infra Red sensor)
+int BUZ = 12;                          // Pin #12 connected to buzzer (Alarm)
 
 // int chk;                              // Variable to read the sensor DHT11
 // DHT11 DHT                             // Define the name DHT for the sensor of Temperature and Humidity
-// #define DHT11_PIN 10                  // Sensor DHT11 conected to the Pin #11 on Arduino
+// #define DHT11_PIN 13                  // Sensor DHT11 conected to the Pin #13 on Arduino
 
 byte encoderPos = 0;
 byte encoderPinALast = LOW;
@@ -48,7 +47,7 @@ byte linSW = 0;
 Bounce SW = Bounce();                 // Definition of Bounce object for the switch (SW) of Encoder
 
 // Begin of display
-TM1637Display display(CLK, DIO);
+Display display(SER, SRCLK, RCLK1, RCLK2, RCLK3, RCLK4, CC);
 
 // Segments map of display
 //
@@ -123,9 +122,7 @@ uint8_t dataWithColon[] = {
 void setup() {
 
   setSyncProvider(RTC.get);                                 // Update the time with data of RTC (Real Time Clock)
-  setSyncInterval(3600);                                  // Set the number of seconds between re-sync
-
-  display.setBrightness (0x0a);                             //(0x0f) is the max brightness
+  setSyncInterval(3600);                                    // Set the number of seconds between re-sync
 
   pinMode(PIR, INPUT);                                      // Define pin of PIR as input
   pinMode(BUZ, OUTPUT);                                     // Define pin of Buzzer as output
