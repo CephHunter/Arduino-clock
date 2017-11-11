@@ -1,5 +1,9 @@
 #include <Arduino.h>      // Arduino library, needed if saved as a .cpp file
 
+// Declaring functions, needed if saved as a .cpp file
+void buzzer();
+void lerEncoder();
+
 /*                       Digital Clock by LAGSILVA
      Digital Clock with PIR & LED Display - TM1637 - 4 Digits x 7 Segments
                Display Time, Temperature, Humidity & Dew Point
@@ -114,10 +118,6 @@ uint8_t dataWithColon[] = {
   0b11101111, // 9
   0b00000000, // 10
 };
-
-// Declaring functions, needed if saved as a .cpp file
-void buzzer();
-void lerEncoder();
 
 
 void setup() {

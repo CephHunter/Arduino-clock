@@ -4,3 +4,5 @@
 * https://github.com/avishorp/TM1637/blob/master/TM1637Display.h
 * http://www.ti.com/lit/ds/symlink/sn74hc595.pdf
 * https://cdn-shop.adafruit.com/datasheets/BL-Q39A-42.PDF
+* https://www.arduino.cc/en/Hacking/LibraryTutorial
+* https://www.arduino.cc/en/Reference/BitRead
