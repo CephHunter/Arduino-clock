@@ -25,7 +25,7 @@ uint8_t RCLK1 = 4;                    // Pin 4 connected to the storage clock of
 uint8_t RCLK2 = 5;                    // Pin 5 connected to the storage clock of the shift register controlling the second from the left display
 uint8_t RCLK3 = 6;                    // Pin 6 connected to the storage clock of the shift register controlling the third from the left display
 uint8_t RCLK4 = 7;                    // Pin 7 connected to the storage clock of the shift register controlling the fourth from the left display
-bool CC       = true;
+bool CC       = true;                 // Display type (CC == true => common cathode; CC == false => common anode)
 
 // Encoder variables
 byte encoderPinSW = 8;                // Encoder variable - SW
