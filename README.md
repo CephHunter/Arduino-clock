@@ -34,10 +34,10 @@ int BUZ = 12;
 Ik heb twee voorbeelden gemaakt over hoe je het display kan maken. Bijde voorbeelden nemen aan dat je een common cathode display hebt, een kleine aanpasing zal nodig zijn als je toch een common annode diplay hebt.
 
 ### Optie 1
-![Option 1](File/Option1.jpeg)
+![Option 1](Files/Option1.jpeg)
 
 ### Optie 2
-![Option 2](File/Option2.jpeg)
+![Option 2](Files/Option2.jpeg)
 
 #### Gebruikte links (niet belangrijk):
 * https://create.arduino.cc/projecthub/lagsilva/complete-digital-clock-including-alarm-and-motion-sensor-da6b59
