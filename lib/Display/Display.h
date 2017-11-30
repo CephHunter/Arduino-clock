@@ -74,6 +74,7 @@ class Display
     uint8_t _RCLK2;
     uint8_t _RCLK3;
     uint8_t _RCLK4;
+    uint8_t RCLK;
     bool _CC;
 };
 

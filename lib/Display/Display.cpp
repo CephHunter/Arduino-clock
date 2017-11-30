@@ -61,8 +61,8 @@ Display::Display(uint8_t SER, uint8_t SRCLK, uint8_t RCLK1, uint8_t RCLK2, uint8
 }
 
 void Display::setSegments(const uint8_t segments[], uint8_t length, uint8_t pos) {
-  for (uint8_t i = 0; i < length; i++) {
-    writeByte(segments[i], pos + i);
+  for (uint8_t i = 1; i <= length; i++) {
+    writeByte(segments[i], pos + i - length);
   }
 }
 
@@ -95,7 +95,7 @@ uint8_t Display::encodeDigit(uint8_t digit) {
   return digitToSegment[digit & 0x0f];
 }
 
-void Display::writeByte(uint8_t data, uint8_t RCLKpin) {
+void Display::writeByte(uint8_t data, uint8_t pos) {
   uint8_t _data = data;
   if (!_CC) {
     _data = ~_data;
@@ -105,19 +105,45 @@ void Display::writeByte(uint8_t data, uint8_t RCLKpin) {
   for (int8_t i = 7; i >= 0; i--) {
     if (bitRead(_data, i) == 1) {
       digitalWrite(_SER, HIGH);
-      Serial.print("1");
+      delayMicroseconds(100);
+      //Serial.print("1");
     } else {
       digitalWrite(_SER, LOW);
-      Serial.print("0");
+      delayMicroseconds(100);
+      //Serial.print("0");
     }
 
     digitalWrite(_SRCLK, HIGH);
+    delayMicroseconds(100);
     digitalWrite(_SRCLK, LOW);
+    delayMicroseconds(100);
   }
 
   // Push shift register storage to real output
-  digitalWrite(RCLKpin, HIGH);
-  digitalWrite(RCLKpin, LOW);
-  Serial.println(" ");
-  Serial.println("--------");
+  Serial.println(pos);
+  switch (pos) {
+    case 0:
+      RCLK = _RCLK1;
+      Serial.println("pos = 1");
+      break;
+    case 1:
+      RCLK = _RCLK2;
+      Serial.println("pos = 2");
+      break;
+    case 2:
+      RCLK = _RCLK3;
+      Serial.println("pos = 3");
+      break;
+    case 3:
+      RCLK = _RCLK4;
+      Serial.println("pos = 4");
+      break;
+  }
+
+  digitalWrite(RCLK, HIGH);
+  delayMicroseconds(100);
+  digitalWrite(RCLK, LOW);
+  delayMicroseconds(100);
+  //Serial.println(" ");
+  //Serial.println("--------");
 }
